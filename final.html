@@ -1,8 +1,33 @@
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>FINAL</title>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110487229-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110487229-1');
+      </script>
+      <meta charset="UTF-8">
+      <title>FINAL</title>
     </head>
+
+    <style>
+      #mediaFinal{
+        color : orangered;
+        display: inline;
+      }
+      h2#notaFinal{
+        color: red;
+        font-size: 50pt;
+      }
+      img#thatfeel{
+        width: 50%;
+        height: 60%;
+      }
+    </style>
+
 
     <body>
         <h1>Calcule quanto você precisa tirar na prova final:</h1> 
@@ -10,26 +35,33 @@
         <form>
           Nota da AB1: <input type="number" id="ab1"> <br>
           Nota da AB2: <input type="number" id="ab2"> <br>
+          Quanto deseja ficar na média final(min 5.5/max 8.14): <input type="number" id="mf" min="5.5" max="8.14" placeholder="5.5" value="5.5">
           <input type="button" value="CALCULAR" id="calcular" onclick="calculaFinal()">
         </form>
 
-        <h2>Nota necessária para passar com 5,5: </h2>
+        <h2>Nota necessária para passar com <div id="mediaFinal">0</div> de média:</h2>
         <h2 id="notaFinal"></h2>
 
         <script>
           function calculaFinal(){
             var ab1 = parseFloat(document.getElementById("ab1").value);
             var ab2 = parseFloat(document.getElementById("ab2").value);
+            var mf = parseFloat(document.getElementById("mf").value) * 10;
+            document.getElementById("mediaFinal").innerHTML = mf/10;
             var mAb = (ab1 + ab2) / 2;
-            var notaFinal = (55 - (6 * mAb)) / 4;
+            var notaFinal = (mf - (6 * mAb)) / 4;
+          
             document.getElementById("notaFinal").innerHTML = notaFinal;
+            if(mAb < 5){
+              document.getElementById("notaFinal").innerHTML = "Infelizmente você já está reprovado, porém precisaria de " + notaFinal
+            }
           }
         </script>
 
         <br>
         <p>Se você chegou até aqui, a coisa deve estar feia :(</p>
         <p>Boa sorte...</p>
-        
+        <img src="thatfeel.jpg" alt="knowthatfeel" id="thatfeel">
     </body>
 
 </html>
